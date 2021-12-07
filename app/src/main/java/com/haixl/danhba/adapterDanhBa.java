@@ -41,20 +41,33 @@ public class adapterDanhBa extends BaseAdapter {
         return i;
     }
 
+    static class ViewHolder{
+        private ImageView imgDb;
+        private TextView txtName;
+        private TextView txtPhone;
+        protected ImageButton btnMenu;
+    }
+
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        LayoutInflater inflater=LayoutInflater.from(context);
-        view=inflater.inflate(R.layout.item_listview,viewGroup,false);
+    public View getView(int i, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder=null;
+        if (convertView==null){
+            viewHolder=new ViewHolder();
+            convertView=LayoutInflater.from(parent.getContext()).inflate(R.layout.item_listview,parent,false);
+            viewHolder.imgDb=convertView.findViewById(R.id.itemAnh);
+            viewHolder.txtName=convertView.findViewById(R.id.itemName);
+            viewHolder.txtPhone=convertView.findViewById(R.id.itemPhone);
+            viewHolder.btnMenu=convertView.findViewById(R.id.btn_menu);
 
-        ImageView imgDb=view.findViewById(R.id.itemAnh);
-        TextView txtName=view.findViewById(R.id.itemName);
-        TextView txtPhone=view.findViewById(R.id.itemPhone);
-        ImageButton btnMenu=view.findViewById(R.id.btn_menu);
+            convertView.setTag(viewHolder);
+        }else{
+            viewHolder= (ViewHolder) convertView.getTag();
+        }
 
-        imgDb.setImageResource(danhBas.get(i).getIdAnh());
-        txtName.setText(danhBas.get(i).getName());
-        txtPhone.setText(danhBas.get(i).getPhone());
-        btnMenu.setOnClickListener(new View.OnClickListener() {
+        viewHolder.imgDb.setImageResource(danhBas.get(i).getIdAnh());
+        viewHolder.txtName.setText(danhBas.get(i).getName());
+        viewHolder.txtPhone.setText(danhBas.get(i).getPhone());
+        viewHolder.btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 PopupMenu popupMenu=new PopupMenu(context,view);
@@ -90,9 +103,9 @@ public class adapterDanhBa extends BaseAdapter {
                             case R.id.update:
                                // Toast.makeText(context,"update",Toast.LENGTH_SHORT).show();
                                 LayoutInflater inflater1=LayoutInflater.from(context);
-                                View mview=inflater1.inflate(R.layout.custom_dialog_edit,null);
-                                TextView txtName= mview.findViewById(R.id.edTen);
-                                TextView txtSDT=mview.findViewById(R.id.edSdt);
+                                View mView=inflater1.inflate(R.layout.custom_dialog_edit,null);
+                                TextView txtName= mView.findViewById(R.id.edTen);
+                                TextView txtSDT=mView.findViewById(R.id.edSdt);
 
                                 txtName.setText(danhBas.get(i).getName());
                                 txtSDT.setText(danhBas.get(i).getPhone());
@@ -100,7 +113,7 @@ public class adapterDanhBa extends BaseAdapter {
                                 AlertDialog.Builder builder1=new AlertDialog.Builder(context);
                                 builder1.setTitle(null);
 
-                                builder1.setView(mview);
+                                builder1.setView(mView);
                                 builder1.setPositiveButton("Lưu", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int pos) {
@@ -131,6 +144,6 @@ public class adapterDanhBa extends BaseAdapter {
             }
         });
 
-        return view;
+        return convertView;
     }
 }
