@@ -36,9 +36,11 @@ public class MainActivity extends AppCompatActivity {
         lvDanhBa=findViewById(R.id.lvContact);
 
         danhBas=new ArrayList<>();
-        for (int i=0;i<10;i++){
-            danhBas.add(new DanhBa(R.drawable.ic_baseline_people_24,"contact"+i,"100"+i));
-        }
+        danhBas.add(new DanhBa(R.drawable.ic_baseline_people_24,"Luong Xuan Hai","0768379308"));
+        danhBas.add(new DanhBa(R.drawable.ic_baseline_people_24,"Nguyen Hong Anh","0768379308"));
+        danhBas.add(new DanhBa(R.drawable.ic_baseline_people_24,"Nguyen Mai Dao","0768379308"));
+        danhBas.add(new DanhBa(R.drawable.ic_baseline_people_24,"Vi Manh Hung","0768379308"));
+        danhBas.add(new DanhBa(R.drawable.ic_baseline_people_24,"Hoang Tuan Khai","0768379308"));
 
         adapterDanhBa=new adapterDanhBa(MainActivity.this,danhBas);
         lvDanhBa.setAdapter(adapterDanhBa);
@@ -86,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
