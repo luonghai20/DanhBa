@@ -26,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<DanhBa> danhBas;
     adapterDanhBa adapterDanhBa;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,24 +40,8 @@ public class MainActivity extends AppCompatActivity {
             danhBas.add(new DanhBa(R.drawable.ic_baseline_people_24,"contact"+i,"100"+i));
         }
 
-
         adapterDanhBa=new adapterDanhBa(MainActivity.this,danhBas);
         lvDanhBa.setAdapter(adapterDanhBa);
-
-        lvDanhBa.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent=new Intent(MainActivity.this,MainActivity2.class);
-                Bundle bundle=new Bundle();
-                bundle.putInt("img",danhBas.get(i).getIdAnh());
-                bundle.putString("name",danhBas.get(i).getName());
-                bundle.putString("phone",danhBas.get(i).getPhone());
-                intent.putExtras(bundle);
-                startActivity(intent);
-
-                return false;
-            }
-        });
     }
 
     @Override
@@ -74,10 +56,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_save:
                 if (edName.getText().toString().equals("")){
                     Toast.makeText(MainActivity.this,"Tên không được trống",Toast.LENGTH_SHORT).show();
-                }else if (CheckVietHoa(edName.getText().toString())==false){
-                    Toast.makeText(MainActivity.this,"Viết hoa chữ cái đầu",Toast.LENGTH_SHORT).show();
-                }
-                else if (edPhone.getText().toString().equals("")){
+                } else if (edPhone.getText().toString().equals("")){
                     Toast.makeText(MainActivity.this,"SDT không được trống",Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -110,19 +89,4 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    public boolean CheckVietHoa(String str) {
-        String str0=str.trim();
-        str0 = str0.replaceAll("\\s+", " ");
-
-        String temp[] = str0.split(" ");
-        String str1="";
-        for (int i=0;i<temp.length;i++){
-            if (Character.isLowerCase(temp[i].charAt(0))){
-                return false;
-            }
-        }
-        return true;
-    }
-
 }

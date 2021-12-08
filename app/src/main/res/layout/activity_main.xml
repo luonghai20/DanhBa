@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:hint="Name of contact"
             android:textSize="14sp"
+            android:lines="1"
             android:layout_margin="5dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -34,6 +35,7 @@
             android:layout_height="wrap_content"
             android:hint="Phone of contact"
             android:textSize="14sp"
+            android:inputType="number"
             android:layout_margin="5dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
